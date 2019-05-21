@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="style.css" />
+    <meta charset="UTF-8">
+    <title>nav</title>
+</head>
+<body>
+   <header>
+       <div class="container">
+           <nav>
+               <ul>
+                   <li><a href="index.html">Home</a></li>
+                   <li><a href="about.html">About</a></li>
+                   <li><a href="contact.html">Contact</a></li>
+               </ul>
+           </nav>
+       </div>
+   </header>
+<body>
+<div class="container">
+    <p>
+        <label for="new-task">Add Item</label><input id="new-task" type="text"><button>Add</button>
+    </p>
+
+    <h3>Todo</h3>
+    <p id="prefill">
+
+    </p>
+    <p id="prefill2">
+
+    </p>
+    <script>
+        var txt = '{ "First":"Go to", "age":30, "Second":"The Gym"}';
+        var obj = JSON.parse(txt);
+        document.getElementById("prefill").innerHTML = obj.First + " " + obj.Second;
+
+        var txt1 = '{ "First":"Go to", "age":30, "Second":"Class"}';
+        var obj1 = JSON.parse(txt1);
+        document.getElementById("prefill2").innerHTML = obj1.First + " " + obj1.Second;
+    </script>
+    <ul id="incomplete-tasks">
+        <li><input type="checkbox"><label>Pay Tuition</label><input type="text"><button class="edit">Edit</button><button class="delete">Delete</button></li>
+        <li class="editMode"><input type="checkbox"><label>Go Shopping</label><input type="text" value="Go Shopping"><button class="edit">Edit</button><button class="delete">Delete</button></li>
+
+    </ul>
+
+    <h3>Completed</h3>
+    <ul id="completed-tasks">
+        <li><input type="checkbox" checked><label>Go Home at 5</label><input type="text"><button class="edit">Edit</button><button class="delete">Delete</button></li>
+    </ul>
+</div>
+
+<script type="text/javascript" src="main.js"></script>
+
+
+
+</body>
+
+
+
+</html>
+
+
