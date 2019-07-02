@@ -1,35 +1,32 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
+import React, { useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import Message from './Message';
 import { fetchMessages } from '../actions';
 
-class MessageList extends Component {
-  componentDidMount() {
-    this.props.dispatch(fetchMessages());
+function MessageList() {
+  const dispatch = useDispatch();
+  const messages = useSelector(state => state.messages.items);
+  const loading = useSelector(state => state.messages.loading);
+  const error = useSelector(state => state.messages.error);
+  useEffect(() => {
+    dispatch(fetchMessages());
+  }, [dispatch]);
+
+  if (error) {
+    return <div>Error: {error}</div>;
   }
 
-  render() {
-    const { messages, error, loading } = this.props;
-    if (error) {
-      return <div>Error: {error}</div>;
-    }
-    if (loading) {
-      return <div>Loading....</div>;
-    }
-    return (
-      <ul>
-        {messages.map(message => (
-          <Message key={message.id} id={message.id} msg={message.data.msg} />
-        ))}
-      </ul>
-    );
+  if (loading) {
+    return <div>Loading....</div>;
   }
+
+  return (
+    <ul>
+      {messages.map((message, idx) => (
+        <Message key={idx} id={message._id} msg={message.msg} />
+      ))}
+    </ul>
+  );
 }
 
-const mapSateToProps = state => ({
-  messages: state.messages.items,
-  loading: state.messages.loading,
-  error: state.messages.error
-});
-
-export default connect(mapSateToProps)(MessageList);
+export default MessageList;

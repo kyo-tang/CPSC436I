@@ -64,7 +64,7 @@ export default function messages(state = initialState, action) {
     case REMOVE_MESSAGE_SUCCESS:
       return {
         ...state,
-        items: state.items.filter(message => message.id !== action.payload.id),
+        items: state.items.filter(message => message._id !== action.payload.id),
         error: null
       };
     case REMOVE_MESSAGE_FAILURE:

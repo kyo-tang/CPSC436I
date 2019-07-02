@@ -1,8 +1,10 @@
 import React from 'react';
-import { connect } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { clearAllMessages } from '../actions';
 
-const ClearAll = ({ dispatch }) => {
+function ClearAll() {
+  const dispatch = useDispatch();
+
   return (
     <div>
       <button
@@ -15,6 +17,6 @@ const ClearAll = ({ dispatch }) => {
       </button>
     </div>
   );
-};
+}
 
-export default connect()(ClearAll);
+export default ClearAll;
