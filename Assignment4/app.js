@@ -9,10 +9,12 @@ const messagesRouter = require('./routes/messages');
 const app = express();
 
 // connect to mongodb
-mongoose
-  .connect('mongodb://localhost:27017/a4', { useNewUrlParser: true })
-  .then(() => console.log('MongoDB connected'))
-  .catch(err => console.log(err));
+mongoose.connect('mongodb://localhost:27017/assignment', { useNewUrlParser: true })
+const db = mongoose.connection
+db.on('error', (error) => console.error(error))
+db.once ('open', () => console.log ('Connected to Database' ))
+const port = 5000;
+app.listen(port, () => console.log(`Server running on port ${port}`));
 
 // view engine setup
 app.use(cors());
@@ -30,5 +32,3 @@ app.get('*', (req, res) => {
   res.send('hello');
 });
 
-const port = 5000;
-app.listen(port, () => console.log(`Server running on port ${port}`));

@@ -5,24 +5,27 @@ const isEmpty = require('lodash.isempty');
 const Message = require('../models/Message');
 
 const messages = [
-  { msg: 'message 1' },
-  { msg: 'message 2' },
-  { msg: 'message 3' }
+  { msg: 'kobe is the best' },
+  { msg: 'lebron sucks' },
+  { msg: 'kyrie is better than lebron' }
 ];
 
-Message.deleteMany({})
-  .then(() => {
-    messages.forEach(message => {
-      const newMessage = new Message({
-        msg: message.msg
-      });
-      newMessage
-        .save()
-        .then(() => console.log(`${message.msg} has been added to MongoDB.`));
-    });
-  })
-  .catch(err => console.log(err));
+//Message.db.isEmpty?console.log("empty"):console.log("not empty");
 
+// preload the message 
+
+  messages.forEach(message => {
+    const newMessage = new Message({
+      msg: message.msg
+    });
+    newMessage
+      .save()
+      .then(() => console.log(`${message.msg} has been added to MongoDB.`));
+  })
+  
+
+
+  
 router.get('/all', function(req, res, next) {
   Message.find({})
     .then(messages => res.json(messages))
