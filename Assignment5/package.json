@@ -3,10 +3,12 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "npm install && npm run client-build && npm run server",
-    "server": "node app.js",
-    "client-build": "cd client && yarn install && yarn build",
-    "dev": "nodemon app.js"
+    "client-install": "npm install --prefix client",
+    "start": "node app.js",
+    "server": "nodemon app.js",
+    "client": "npm start --prefix client",
+    "dev": "concurrently \"npm run server\" \"npm run client\"",
+    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix client && npm run build --prefix client"
   },
   "dependencies": {
     "cookie-parser": "~1.4.4",
@@ -22,6 +24,7 @@
     "redux-logger": "^3.0.6"
   },
   "devDependencies": {
+    "concurrently": "^4.1.1",
     "nodemon": "^1.19.1",
     "prettier": "^1.18.2"
   }

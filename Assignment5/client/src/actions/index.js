@@ -1,14 +1,10 @@
 import axios from 'axios';
 
-const messageApi = axios.create({
-  baseURL: 'http://localhost:5000/messages/'
-});
-
 export function fetchMessages() {
   return dispatch => {
     dispatch(fetchMessagesBegin());
-    return messageApi
-      .get('/all')
+    return axios
+      .get('/messages/all')
       .then(res => dispatch(fetchMessagesSuccess(res.data)))
       .catch(err => dispatch(fetchMessagesFailure(err.response.data)));
   };
@@ -35,8 +31,8 @@ export const fetchMessagesFailure = error => ({
 export const addMessage = message => {
   return dispatch => {
     dispatch(addMessageBegin());
-    return messageApi
-      .post('/new', { msg: message })
+    return axios
+      .post('/messages/new', { msg: message })
       .then(res => dispatch(addMessageSuccess(res.data)))
       .catch(err => dispatch(addMessageFailure(err.response.data)));
   };
@@ -63,8 +59,8 @@ export const addMessageFailure = error => ({
 export const removeMessage = id => {
   return dispatch => {
     dispatch(removeMessageBegin());
-    return messageApi
-      .delete(`/remove/${id}`)
+    return axios
+      .delete(`/messages/remove/${id}`)
       .then(res => dispatch(removeMessageSuccess(res.data)))
       .catch(err => dispatch(removeMessageFailure(err.response.data)));
   };
@@ -91,8 +87,8 @@ export const removeMessageFailure = error => ({
 export const clearAllMessages = () => {
   return dispatch => {
     dispatch(clearAllMessagesBegin());
-    return messageApi
-      .delete('/destroy')
+    return axios
+      .delete('/messages/destroy')
       .then(() => dispatch(clearAllMessagesSuccess()))
       .catch(err => dispatch(clearAllMessagesFailure(err.response.data)));
   };
