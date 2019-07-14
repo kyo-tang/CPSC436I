@@ -5,9 +5,9 @@ const isEmpty = require('lodash.isempty');
 const Message = require('../models/Message');
 
 const messages = [
-  { msg: 'message 1' },
-  { msg: 'message 2' },
-  { msg: 'message 3' }
+  { msg: 'kobe' },
+  { msg: 'lebron' },
+  { msg: 'kyrie' }
 ];
 
 messages.forEach(message => {
